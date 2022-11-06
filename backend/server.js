@@ -4,21 +4,20 @@ import data from './data.js';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import config from './config.js';
+import UserRouter from './routers/userRouter.js';
 
 
-mongoose.connect(config.MONGODB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreationIndex: true
-}).then(() => {
+mongoose.connect(config.MONGODB_URL).then(()=>{
     console.log('Connected to mongodb');
 })
-.catch((error) => {
+.catch((error)=>{
     console.log(error.reason);
 });
 
 const app = express();
 app.use(cors());
+
+app.use("/api/users", UserRouter);
 app.get("/api/products", (req, res) => {
     res.send(data.products);
 });
