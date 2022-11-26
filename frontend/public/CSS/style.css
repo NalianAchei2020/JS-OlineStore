@@ -4,18 +4,25 @@
 html {
   font-size: 62.5%; /* 16px *62.5 = 10px = 1rem */
 }
-a {
+a{
   color: #000000;
   text-decoration: none;
 }
 a:hover {
   color: #f08040;
 }
+button{
+  cursor: pointer;
+}
+input,
 button {
   font: 1.6rem;
   padding: 1rem;
-  cursor: pointer;
 }
+input{
+  border-radius: 0.5rem;
+}
+input:hover,
 button:hover {
   border: 0.1rem #404040 solid;
 }
@@ -23,6 +30,35 @@ button.primary {
   background: #f0c040;
   border-radius: 0.5rem;
   border: 0.1rem #808080;
+}
+.overlay{
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(16, 16, 16, 0.5);
+}
+.overlay.active{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:#ffffffff ;
+}
+
+.overlay > div{
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  max-width: 60rem;
+}
+.overlay > div > *{
+   margin: 2rem;
 }
 .fw {
   width: 100%;
@@ -77,6 +113,8 @@ header a {
   height: 35%;
 }
 .row {
+  display: flex;
+  flex-wrap: wrap;
   height: 100%;
   position: relative;
   border-radius: none;
@@ -270,3 +308,101 @@ header a {
 }
 
 /* signinSreen */
+.form-container{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  font-size: larger;
+  
+}
+
+.form-items{
+  display: flex;
+  flex-direction: column;
+  width: 32rem;
+  padding:2rem;
+  border: 0.1rem #c0c0c0 solid;
+  border-radius: 0.5rem;
+  list-style-type: none;
+}
+.form-items li{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+
+}
+.form-container h1{
+  font: 2.5rem;
+  text-align: center;
+}
+
+/*checkout*/
+.checkout-step{
+  display: flex;
+  justify-content: space-around;
+  width: 40rem;
+  margin: 1rem auto;
+}
+.checkout-step > div{
+border-top: 0.3rem #c0c0c0 solid;
+flex: 1 1;
+padding-top: 1rem;
+}
+.checkout-step > div.active{
+  color:#f08000;
+  border-top-color: #f08000;
+}
+/*oreder*/
+.order{
+  display: flex;
+  flex-wrap: wrap;
+  padding:1rem ;
+  justify-content: space-between;
+}
+.order h2{
+  margin: 0;
+  font-size: 2rem;
+  padding-bottom: 1rem;
+}
+.order .cart-list-container{
+  padding: 0;
+}
+.order-info{
+  flex:  3 1 60rem;
+}
+order-info > div:first-child{
+  margin-top: 0;
+}
+.order-info > div{
+  border: 0.1rem #c0c0c0 solid;
+  border-radius: 0.5rem;
+  background-color:#fcfcfc ;
+  padding: 1rem;
+  margin: 1rem;
+  font-size: larger;
+}
+.order-action{
+  flex: 1 1 20rem;
+  border: 0.1rem #c0c0c0 solid;
+  border-radius: 0.1rem;
+  background-color: #fcfcfc;
+  padding:1rem;
+
+}
+.order-action > ul{
+  padding: 0;
+  list-style-type: none;
+  font-size: larger;
+}
+.order-action li{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.order-action .total{
+  font-size: 2rem;
+  font-weight:bold ;
+  color: #c04000;
+}

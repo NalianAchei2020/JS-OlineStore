@@ -1,16 +1,18 @@
-import { signin } from "../api";
+import { register } from "../api";
 import { getUserInfo, setUserInfo } from "../localstorage";
 import { hideshowLoading, redirectUser, showLoading, showMessage } from "../utils";
 
-const SigninScreen = {
+const RegisterScreen = {
     after_render: ()=>{
-      document.getElementById("signin-form")
+      document.getElementById("register-form")
       .addEventListener('submit', async(e)=>{
         e.preventDefault();
         showLoading();
-        const data = await signin({
+        const data = await register({
+          name: document.getElementById('name').value,
           email: document.getElementById('email').value,
           password: document.getElementById('password').value,
+          
 
         });
         hideshowLoading();
@@ -29,26 +31,34 @@ const SigninScreen = {
     }
     return `
     <div class="form-container">
-    <form id="signin-form">
+    <form id="register-form">
     <ul class="form-items">
     <li>
-    <h1>Singin-In</h1>
+    <h1>Create Account</h1>
+    </li>
+    <li>
+    <label for="name">Name</label>
+    <input type="name" name="name" id="name" />
     </li>
     <li>
     <label for="email">Email</label>
     <input type="email" name="email" id="email" />
     </li>
     <li>
-    <label for="password">Password</label>
+    <label for="password">Confirm Password</label>
     <input type = "password" name="password" id="password" />
     </li>
     <li>
-    <button type="submit" class="primary">Signin</button>
+    <label for="password">Password</label>
+    <input type = "password" name="repassword" id="repassword" />
+    </li>
+    <li>
+    <button type="submit" class="primary">Register</button>
     </li>
     <li>
     <div>
-    New User?
-    <a href="/#/register">Create your account</a>
+    Already have an account?
+    <a href="/#/signin">Sign-In</a>
     </div>
     </li>
     </ul>
@@ -57,4 +67,4 @@ const SigninScreen = {
     `
   }
 }
-export default SigninScreen;
+export default RegisterScreen;

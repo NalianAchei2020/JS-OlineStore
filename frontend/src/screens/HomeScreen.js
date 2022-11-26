@@ -1,7 +1,9 @@
 import axios from 'axios';
 import Rating from '../../Components/Ratings';
+import { hideshowLoading, showLoading } from '../utils';
 const HomeScreen = {
   render: async () =>{
+    showLoading();
     //Fetching data from beackend
     const response = await axios({
         url:"http://localhost:5000/api/products",
@@ -9,6 +11,7 @@ const HomeScreen = {
          'Content-Type': 'application/json',
       },  
     });
+    hideshowLoading();
     if(!response || response.statusText !== 'OK'){
         return `<div>Error in getting data</div>`;
     }

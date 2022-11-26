@@ -3,8 +3,10 @@ import express from 'express';
 import data from './data.js';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
 import config from './config.js';
 import UserRouter from './routers/userRouter.js';
+
 
 
 mongoose.connect(config.MONGODB_URL).then(()=>{
@@ -16,6 +18,8 @@ mongoose.connect(config.MONGODB_URL).then(()=>{
 
 const app = express();
 app.use(cors());
+
+app.use(bodyParser.json())
 
 app.use("/api/users", UserRouter);
 app.get("/api/products", (req, res) => {
@@ -34,6 +38,10 @@ app.get("/api/products/:id", (req, res) =>{
     
 });
 
+app.use((err, res, next)=>{
+  const status = err.name && err.name === 'ValidationError'? 400: 500;
+  res.status(status).send(err.message);
+})
 app.listen(5000, () => {
     console.log('serve at http://localhost:5000');
 });
