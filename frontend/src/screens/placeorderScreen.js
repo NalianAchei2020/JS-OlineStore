@@ -6,7 +6,7 @@ import { hideshowLoading, showLoading, showMessage } from "../utils";
 const convertCartToOrder = ()=>{
     const oderItem = getCartItems();
     if(oderItem.length === 0){
-  document.location,hash = './cart';
+  document.location.hash = './cart';
     }
     const shipping = getShipping();
     if(!shipping.address){
@@ -33,8 +33,7 @@ const convertCartToOrder = ()=>{
 
 const PlaceorderScreen={
     after_render:async()=>{
-        /*
-        document.getElementsById('placeorder-button')
+        document.getElementById('placeorder-button')
         .addEventListener('click', async()=>{
         const order = convertCartToOrder();
         showLoading();
@@ -46,7 +45,7 @@ const PlaceorderScreen={
             cleanCart();
             document.location.hash = `/order/${data.order._id}`;
         }
-        })*/
+        })
     },
 
     render:()=>{

@@ -22,7 +22,7 @@ const routes = {
     '/profile': ProfileScreen,
     '/shipping': ShippingScreen,
     '/payment': PaymentScreen,
-    '/placeorder': PlaceorderScreen,
+   '/placeorder': PlaceorderScreen,
 }
 const router = async () =>{
     showLoading();

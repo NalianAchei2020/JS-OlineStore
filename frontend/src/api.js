@@ -1,5 +1,4 @@
 import axios from "axios"
-import { response } from "express";
 import { apiUrl } from "./config"
 import { getUserInfo } from "./localstorage";
 
@@ -101,12 +100,12 @@ return response.data;
       return {error: err.response.data.message || err.message }
   }
 }
-/*
+
 export const createOrder = async(order)=>{
  try{
   const {token} = getUserInfo();
   const response = await axios({
-    url: `${apiUrl}/api/order`,
+    url: `${apiUrl}/api/orders`,
     method: 'POST',
     headers: {
       "Content-Type": 'application/json',
@@ -120,6 +119,6 @@ export const createOrder = async(order)=>{
   return response.data;
  }
  catch(err){
- return {error: (err.response?err.response.data.message: err.message) || err.message}
+ return {error: (err.response? err.response.data.message: err.message)}
  }
-}*/
+}

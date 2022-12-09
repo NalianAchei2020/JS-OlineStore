@@ -6,8 +6,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import config from './config.js';
 import UserRouter from './routers/userRouter.js';
-
-
+import orderRouter from './routers/orderRouter.js'
 
 mongoose.connect(config.MONGODB_URL).then(()=>{
     console.log('Connected to mongodb');
@@ -22,6 +21,7 @@ app.use(cors());
 app.use(bodyParser.json())
 
 app.use("/api/users", UserRouter);
+app.use("/api/orders", orderRouter);
 app.get("/api/products", (req, res) => {
     res.send(data.products);
 });
