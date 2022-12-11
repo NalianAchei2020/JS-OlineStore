@@ -1,6 +1,5 @@
 
-import orderRouter from "../../../backend/routers/orderRouter";
-import {  getOrder, getPaypalClientId } from "../api";
+import {  getOrder, getPaypalClientId, payOrder } from "../api";
 import {  hideshowLoading, parseRequestUrl, rerender, showLoading, showMessage, } from "../utils";
 
 const addPaypalSdk = async(totalPrice)=>{
@@ -43,10 +42,14 @@ const handlePayment = (clientId, totalPrice) =>{
                 ],
             })
         },
-        onAuthorize(data, actions){
+      onAuthorize(data, actions){
             return actions.payment.execute().then(async()=>{
                showLoading();
-               //call pay order 
+               await payOrder(parseRequestUrl().id, {
+                orderId: data.orderId,
+                payerId: data.payerId,
+                paymentId: data.paymentId,
+               });
                hideshowLoading();
                showMessage("Payment was successful.", ()=>{
                 rerender(OrderScreen);

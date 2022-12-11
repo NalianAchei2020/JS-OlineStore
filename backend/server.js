@@ -25,7 +25,7 @@ app.use(bodyParser.json())
 
 app.use("/api/users", UserRouter);
 app.use("/api/orders", orderRouter);
-app.use("api/paypal/clientId", (req, res)=>{
+app.get("api/paypal/clientId", (req, res)=>{
     res.send({clientId: config.PAYPAL_CLIENT_ID});
 })
 app.get("/api/products", (req, res) => {
