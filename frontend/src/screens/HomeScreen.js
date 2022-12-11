@@ -1,21 +1,15 @@
-import axios from 'axios';
+
 import Rating from '../../Components/Ratings';
-import { hideshowLoading, showLoading } from '../utils';
+import { getProducts } from '../api';
+import {parseRequestUrl } from '../utils';
 const HomeScreen = {
   render: async () =>{
-    showLoading();
-    //Fetching data from beackend
-    const response = await axios({
-        url:"http://localhost:5000/api/products",
-      headers:{
-         'Content-Type': 'application/json',
-      },  
-    });
-    hideshowLoading();
-    if(!response || response.statusText !== 'OK'){
-        return `<div>Error in getting data</div>`;
+    const { value } = parseRequestUrl();
+    const products = await getProducts({ searchKeyword: value });
+    if (products.error) {
+      return `<div class="error">${products.error}</div>`;
     }
-    const products = response.data;
+
       return`
       <div class="container-fluid hero">
       <div class="row align-items-start">

@@ -1,13 +1,16 @@
 
 import express from 'express';
-import data from './data.js';
+import path from 'path';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import config from './config.js';
 import UserRouter from './routers/userRouter.js';
 import orderRouter from './routers/orderRouter.js'
+import uploadRouter from './routers/uploadRouter.js';
+import productRouter from './routers/productRouter.js';
 
+const __dirname = path.resolve();
 mongoose.connect(config.MONGODB_URL,{
     useNewUrlParser: true,
     useUnifiedTopology:true
@@ -22,15 +25,23 @@ const app = express();
 app.use(cors());
 
 app.use(bodyParser.json())
-
+app.use('/api/uploads', uploadRouter);
 app.use("/api/users", UserRouter);
+app.use('/api/products', productRouter);
 app.use("/api/orders", orderRouter);
 app.get("api/paypal/clientId", (req, res)=>{
     res.send({clientId: config.PAYPAL_CLIENT_ID});
 })
-app.get("/api/products", (req, res) => {
-    res.send(data.products);
+
+app.use('/uploads', express.static(path.join(__dirname, '/../uploads')));
+app.use(express.static(path.join(__dirname, '/../frontend')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../JS OlineStore/frontend/public/index.html'));
 });
+
+/*app.get("/api/products", (req, res) => {
+    res.send(data.products);
+});)
 
 app.get("/api/products/:id", (req, res) =>{
     const Product = data.products.find((x) => x._id === req.params.id);
@@ -43,7 +54,7 @@ app.get("/api/products/:id", (req, res) =>{
     }
     
 });
-
+*/
 app.use((err, res, next)=>{
   const status = err.name && err.name === 'ValidationError'? 400: 500;
   res.status(status).send(err.message);

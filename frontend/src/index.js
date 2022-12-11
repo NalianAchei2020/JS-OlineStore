@@ -11,9 +11,15 @@ import ShippingScreen from './screens/shippingScreen.js';
 import PaymentScreen from './screens/paymentScreen.js';
 import PlaceorderScreen from './screens/placeorderScreen.js';
 import OrderScreen from './screens/OrderScreen .js';
+import Aside from '../Components/Aside.js';
+import DashboardScreen from './screens/DashboardScreen.js';
+import ProductListScreen from './screens/ProductListScreen.js';
+import OrderListScreen from './screens/OrderListScreen.js';
+import ProductEditScreen from './screens/ProductEditScreen.js';
 
 const routes = {
     "/": HomeScreen,
+    '/product/:id/edit': ProductEditScreen,
     '/product/:id': ProductScreen,
     '/order/:id': OrderScreen,
     '/cart/:id': cartScreen,
@@ -24,6 +30,9 @@ const routes = {
     '/shipping': ShippingScreen,
     '/payment': PaymentScreen,
    '/placeorder': PlaceorderScreen,
+   '/dashboard': DashboardScreen,
+   '/productlist': ProductListScreen,
+   '/orderlist': OrderListScreen,
 }
 const router = async () =>{
     showLoading();
@@ -35,10 +44,16 @@ const router = async () =>{
     const header = document.getElementById('header-container');
     header.innerHTML = await Header.render();
     await Header.after_render();
-    const main = document.getElementById('main-container');
-    main.innerHTML= await screen.render();
-   if(screen.after_render) await screen.after_render();
-    hideshowLoading();
+
+  const aside = document.getElementById('aside-container');
+  aside.innerHTML = await Aside.render();
+  await Aside.after_render();
+
+
+  const main = document.getElementById('main-container');
+  main.innerHTML = await screen.render();
+  if (screen.after_render) await screen.after_render();
+  hideshowLoading();
 }
 window.addEventListener('load', router);
 window.addEventListener('hashchange', router)

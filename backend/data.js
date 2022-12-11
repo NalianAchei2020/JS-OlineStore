@@ -9,7 +9,8 @@ export default{
             brand:'Doir',
             rating: 5,
             numReview: 10,
-            countInStock: 6
+            countInStock: 6,
+            
         },
         {
             _id:'222222222222222222222222',
@@ -20,7 +21,8 @@ export default{
             brand:'Doir',
             rating: 5,
             numReview: 10,
-            countInStock: 6
+            countInStock: 6,
+            
         },
         {
             _id:'333333333333333333333333',
@@ -31,7 +33,8 @@ export default{
             brand:'Doir',
             rating: 4.5,
             numReview: 10,
-            countInStock: 6
+            countInStock: 6,
+           
         },
         {
             _id:'444444444444444444444444',
@@ -42,7 +45,8 @@ export default{
             brand:'Doir',
             rating: 4.5,
             numReview: 10,
-            countInStock: 6
+            countInStock: 6,
+           
         },
         {
             _id:'555555555555555555555555',
@@ -53,7 +57,8 @@ export default{
             brand:'Doir',
             rating: 4.5,
             numReview: 10,
-            countInStock: 6
+            countInStock: 6,
+           
         },
         {
             _id:'666666666666666666666666',
@@ -64,7 +69,8 @@ export default{
             brand:'Doir',
             rating: 4.5,
             numReview: 10,
-            countInStock: 6
+            countInStock: 6,
+            
         },
         {
             _id:'777777777777777777777777',
@@ -75,7 +81,8 @@ export default{
             brand:'Doir',
             rating: 4.5,
             numReview: 10,
-            countInStock: 6
+            countInStock: 6,
+           
         },
         {
             _id:'888888888888888888888888',
@@ -86,7 +93,8 @@ export default{
             brand:'Doir',
             rating: 4.5,
             numReview: 10,
-            countInStock: 6
+            countInStock: 6,
+            
         },
     ],
 }

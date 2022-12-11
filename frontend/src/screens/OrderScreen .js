@@ -1,5 +1,6 @@
 
-import {  getOrder, getPaypalClientId, payOrder } from "../api";
+import {  getOrder, getPaypalClientId, payOrder, deliverOrder } from "../api";
+import { getUserInfo} from "../localstorage";
 import {  hideshowLoading, parseRequestUrl, rerender, showLoading, showMessage, } from "../utils";
 
 const addPaypalSdk = async(totalPrice)=>{
@@ -65,7 +66,16 @@ const handlePayment = (clientId, totalPrice) =>{
 const OrderScreen={
    
     after_render:async()=>{
-        
+        const request = parseRequestUrl();
+        if (document.getElementById('deliver-order-button')) {
+          document.addEventListener('click', async () => {
+            showLoading();
+            await deliverOrder(request.id);
+            hideLoading();
+            showMessage('Order Delivered.');
+            rerender(OrderScreen);
+          });
+        }
     },
 
     render: async()=>{
@@ -79,7 +89,7 @@ const OrderScreen={
             shippingPrice,
             taxPrice,
             totalPrice,
-            oderItem,
+            orderItems,
             isDelivered,
             deliveredAt,
             isPaid,
@@ -118,7 +128,24 @@ const OrderScreen={
         <h2>Shopping Cart</h2>
         <div>Price</div>
         </li>
-        s
+        ${orderItems
+            .map(
+              (item) => `
+            <li>
+              <div class="cart-image">
+                <img src="${item.image}" alt="${item.name}" />
+              </div>
+              <div class="cart-name">
+                <div>
+                  <a href="/#/product/${item.product}">${item.name} </a>
+                </div>
+                <div> Qty: ${item.qty} </div>
+              </div>
+              <div class="cart-price"> $${item.price}</div>
+            </li>
+            `
+            )
+            .join('\n')}
         </ul>
         </div>
         </div>
@@ -134,6 +161,13 @@ const OrderScreen={
         <li><div>Tax</div><div>$${taxPrice}</div></li>
         <li  class="total"><div>Order Total</div><div>$${totalPrice}</div></li>
         <li><div class="fw" id="paypal-button"></div></li>
+        <li>
+                 ${
+                   isPaid && !isDelivered && isAdmin
+                     ? `<button id="deliver-order-button" class="primary fw">Deliver Order</button>`
+                     : ''
+                 }
+                 <li>
         </ul>
         </div>
         </div>
