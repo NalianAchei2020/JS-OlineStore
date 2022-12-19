@@ -17,7 +17,7 @@ const convertCartToOrder = ()=>{
         document.location.hash = '/payment';
     }
     const itemsPrice = oderItem.reduce((a,c)=> a+c.price *c.qty, 0);
-    const shippingPrice = itemsPrice > 100? 0: 10;
+    const shippingPrice = itemsPrice>100? 0: 10;
     const taxPrice = Math.round(0.15 *itemsPrice*100)/100;
     const totalPrice = itemsPrice + shippingPrice + taxPrice;
     return {

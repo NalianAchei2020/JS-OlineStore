@@ -10,11 +10,12 @@ import ProfileScreen from './screens/ProfileScreen.js';
 import ShippingScreen from './screens/shippingScreen.js';
 import PaymentScreen from './screens/paymentScreen.js';
 import PlaceorderScreen from './screens/placeorderScreen.js';
-
+import OrderScreen from './screens/OrderScreen .js';
 
 const routes = {
     "/": HomeScreen,
     '/product/:id': ProductScreen,
+    '/order/:id': OrderScreen,
     '/cart/:id': cartScreen,
     '/cart': cartScreen,
     '/signin': SigninScreen,
